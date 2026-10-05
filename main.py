@@ -186,9 +186,8 @@ def managers():
             print("b. back ")
             a = input("enter :")
             if a == 'a':
-               o = login_security.registered()
-               if o == 0:
-                   break
+               login_security.registered()
+               continues()
             if a == 'b':
                 break
             continues()

@@ -25,16 +25,16 @@ class Login:
             print(f"{i['username']} , ===> {i['users']}")
 
     def saving(self):
-        with open(self.file,'w') as f:
-            json.dump(self.cookie,f ,indent=4)
+        with open(self.file, 'w') as f:
+            json.dump(self.cookie, f, indent=4)
+
     def loading(self):
         try:
-            with open(self.file,'r') as f:
+            with open(self.file, 'r') as f:
                 self.cookie = json.load(f)
             return self.cookie[0]['users']
         except (FileNotFoundError, json.JSONDecodeError):
             self.cookie = []
-
 
     def manage_cashiers(self):
         print("============Welcome to manage cinema============")
@@ -49,16 +49,13 @@ class Login:
         return False
 
     def registered(self):
-            username = input("Enter username: ")
-            password = input("Enter password: ")
-            while True:
-                note = input("Enter are you manager or cashier: ").lower()
-
-                if note == 'manager' and note == 'cashier':
-                    self.register(username, password, note)
-                    print("register successful")
-                    return 0
-                elif note != 'manager' and note != 'cashier':
-                    print("please enter full world")
-
-
+        username = input("Enter username: ")
+        password = input("Enter password: ")
+        while True:
+            note = input("Enter are you manager or cashier: ")
+            if note == 'manager' or note == 'cashier':
+                self.register(username, password, note)
+                print("register successful")
+                break
+            else:
+                print("please enter full world")
