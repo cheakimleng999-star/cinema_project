@@ -2,6 +2,7 @@ from system.model.staff import Client
 from system.model.manager_cashier import Manager
 from system.model.login import Login
 from system.model.pdf_ticket import *
+import sys
 import time
 
 
@@ -35,7 +36,6 @@ def cashiers():
 
             if g == "wrong":
                 break
-            # To put payment total
             for i in range(how):
                 while True:
                     try:
@@ -62,7 +62,10 @@ def cashiers():
             ]
             print("Your seats:", ",".join(f"[{seat}]" for seat in user_seat))
             user += 1
-            print("please waiting 5 ......")
+            for i in range(10):
+                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
+                sys.stdout.flush()
+                time.sleep(0.5)
             time.sleep(5)
             mainss()
             continues()
@@ -70,7 +73,7 @@ def cashiers():
         elif choice == '3':
             manager_cashier.view_data()
             try:
-                deletes = int(input("enter ID to remove:"))
+                deletes = int(input("enter [HALL] to remove:"))
                 manager_cashier.removing(delete=deletes)
                 continues()
             except ValueError:
@@ -123,7 +126,8 @@ def managers():
                     continues()
                     break
                 except ValueError:
-                    print("wrong Value!!")
+                    print("wrong value!!")
+
         elif choice == '3':
             manager_cashier.view_data()
             how = manager_cashier.payment()
@@ -137,7 +141,6 @@ def managers():
                 continues()
                 break
 
-
             for i in range(how):
                 while True:
                     try:
@@ -147,7 +150,6 @@ def managers():
                             e['seat']
                             for e in data
                         ]
-
                         if seat in booking:
                             print("‼️ This seat has been book by someone")
                         else:
@@ -163,23 +165,28 @@ def managers():
                 if e['user'] == user
             ]
             print("Your seats:", ",".join(f"[{seat}]" for seat in user_seat))
-            user += 1
-            print("please waiting 5 ......")
-            time.sleep(5)
-            mainss()
 
+            user += 1
+            for i in range(10):
+                sys.stdout.write("\rwaiting 5 second to create PDF" + "."* (i % 4))
+                sys.stdout.flush()
+                time.sleep(0.5)
+            print("\nDone!!")
+            mainss()
             continues()
 
         elif choice == '4':
             manager_cashier.view_data()
             try:
-                deletes = int(input("enter ID to remove:"))
+                deletes = int(input("enter HALL to remove:"))
                 manager_cashier.removing(delete=deletes)
                 continues()
             except ValueError:
                 print("please enter valid ID")
                 continues()
+
         elif choice == '5':
+            print("*" * 40)
             login_security.view_manager()
             print("*" *40)
             print("a. for add more ")

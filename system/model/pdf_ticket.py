@@ -18,6 +18,7 @@ def mainss():
         data = json.load(f)
         for i in data:
             h = i['time_start']
+            ss = str(i['ID'])
 
     with open('system/database/client.json', 'r') as f:
         data = json.load(f)
@@ -37,6 +38,7 @@ def mainss():
 
     for user, seats in users.items():
         total_payment = n
+        hall = ss
         date = h
         theater = m
         seat = ", ".join(map(str, seats))
@@ -354,7 +356,7 @@ def mainss():
     pdf.drawString(
         x + 63 * mm,
         y + 14 * mm,
-        "time start: " + date
+        "HALL: " + hall
     )
 
     pdf.drawString(

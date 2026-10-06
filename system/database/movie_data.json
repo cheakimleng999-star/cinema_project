@@ -1,0 +1,20 @@
+[
+    {
+        "ID": 1,
+        "movie_name": "spider man",
+        "time_start": "4:00 PM",
+        "price": 3.0
+    },
+    {
+        "ID": 2,
+        "movie_name": "avenger doomsday",
+        "time_start": "5:00 PM",
+        "price": 2.5
+    },
+    {
+        "ID": 3,
+        "movie_name": "ghost",
+        "time_start": "5:30 PM",
+        "price": 4.0
+    }
+]
