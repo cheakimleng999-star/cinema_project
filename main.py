@@ -28,45 +28,35 @@ def cashiers():
 
         elif choice == '2':
             manager_cashier.view_data()
-            how = manager_cashier.payment()
-
-            if how == 0:
-                break
+            how_many, choose = manager_cashier.payment()
             g = manager_cashier.check_outs1()
-
-            if g == "wrong":
+            if g == 0:
+                continues()
                 break
-            for i in range(how):
+            for i in range(how_many):
                 while True:
                     try:
                         seat = int(input("Enter seat number from 1-100: "))
                         data = client.saving()
-                        booking = [
-                            e['seat']
+                        already_book = any(
+                            e['seat'] == seat and e['hall'] == choose
                             for e in data
-                        ]
+                        )
 
-                        if seat in booking:
-                            print("‼️ This seat has been book by someone")
+                        if already_book:
+                            print("‼️ This seat has been booked by someone in this hall")
                         else:
-                            client.enter_data(seat, user)
-                            print(f"✅ Your seat booking [{seat}] now")
+                            client.enter_data(seat, choose, user)  # pass hall too
+                            print(f"✅ Your seat booking [Hall {choose} - Seat {seat}] is confirmed")
                             break
                     except ValueError:
-                        print("it not a number!!")
-            data = client.saving()
-            user_seat = [
-                e['seat']
-                for e in data
-                if e['user'] == user
-            ]
-            print("Your seats:", ",".join(f"[{seat}]" for seat in user_seat))
+                        print("It's not a number!!")
             user += 1
             for i in range(10):
-                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
+                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 4))
                 sys.stdout.flush()
                 time.sleep(0.5)
-            time.sleep(5)
+            print("\nDone!!")
             mainss()
             continues()
 
@@ -127,48 +117,34 @@ def managers():
                     break
                 except ValueError:
                     print("wrong value!!")
-
         elif choice == '3':
             manager_cashier.view_data()
-            how = manager_cashier.payment()
-
-            if how == 0:
-                continues()
-                break
+            how_many, choose = manager_cashier.payment()
             g = manager_cashier.check_outs1()
-
             if g == 0:
                 continues()
                 break
-
-            for i in range(how):
+            for i in range(how_many):
                 while True:
                     try:
                         seat = int(input("Enter seat number from 1-100: "))
                         data = client.saving()
-                        booking = [
-                            e['seat']
+                        already_book = any(
+                            e['seat'] == seat and e['hall'] == choose
                             for e in data
-                        ]
-                        if seat in booking:
-                            print("‼️ This seat has been book by someone")
+                        )
+
+                        if already_book:
+                            print("‼️ This seat has been booked by someone in this hall")
                         else:
-                            client.enter_data(seat, user)
-                            print(f"✅ Your seat booking [{seat}] now")
+                            client.enter_data(seat, choose, user)  # pass hall too
+                            print(f"✅ Your seat booking [Hall {choose} - Seat {seat}] is confirmed")
                             break
                     except ValueError:
-                        print("it not a number!!")
-            data = client.saving()
-            user_seat = [
-                e['seat']
-                for e in data
-                if e['user'] == user
-            ]
-            print("Your seats:", ",".join(f"[{seat}]" for seat in user_seat))
-
+                        print("It's not a number!!")
             user += 1
             for i in range(10):
-                sys.stdout.write("\rwaiting 5 second to create PDF" + "."* (i % 4))
+                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 4))
                 sys.stdout.flush()
                 time.sleep(0.5)
             print("\nDone!!")

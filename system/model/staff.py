@@ -7,12 +7,13 @@ class Client:
         self.json = 'system/database/client.json'
         self.datas = []
 
-    def enter_data(self , seat ,user):
+    def enter_data(self , seat ,user ,halls):
         data = {
             'user':user,
             'id'  : random.randint(1000,9999)   ,
             'seat': seat  ,
-            'time': datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            'time': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            'hall': halls
         }
         self.datas.append(data)
         self.saving()

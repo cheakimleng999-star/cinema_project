@@ -13,12 +13,13 @@ def mainss():
         for i in data:
             m = i['name_movie']
             n = i["total"]
+            o = i['hall']
 
     with open('system/database/movie_data.json', 'r') as f:
         data = json.load(f)
         for i in data:
             h = i['time_start']
-            ss = str(i['ID'])
+
 
     with open('system/database/client.json', 'r') as f:
         data = json.load(f)
@@ -38,7 +39,7 @@ def mainss():
 
     for user, seats in users.items():
         total_payment = n
-        hall = ss
+        hall = str(o)
         date = h
         theater = m
         seat = ", ".join(map(str, seats))

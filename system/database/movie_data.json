@@ -16,5 +16,12 @@
         "movie_name": "ghost",
         "time_start": "5:30 PM",
         "price": 4.0
+    },
+    {
+        "ID": 4,
+        "movie_name": "ka",
+        "time_start": "3:50 PM",
+        "price": 4.0,
+        "hall": "system/database/movie_data.json"
     }
 ]

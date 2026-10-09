@@ -23,7 +23,6 @@ class Manager:
             'time_start': time,
             'price'     : price,
 
-
         }
         self.movie_name.append(data)
         self.saving()
@@ -51,13 +50,14 @@ class Manager:
             try:
                 choose = int(input("enter movie [HALL] you want to enjoy :"))
                 for i in self.movie_name:
+
                     if choose == i['ID']:
                        how_many = int(input("how many seats you want:"))
                        print(f"{how_many}X of movie {i['movie_name']} to cart. ")
-
                        total  = i['price'] * how_many
                        wu = {
                            'name_movie' : i['movie_name'],
+                           'hall' : choose,
                            'how_many': how_many,
                            'total' : total,
                            'date_total' : datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
@@ -67,7 +67,7 @@ class Manager:
                        with open(self.file1,'w') as f:
                            json.dump(self.check_out,f , indent=4)
                            self.check_outs()
-                       return how_many
+                       return how_many , choose
                 print("fail payment dont have in your data")
             except ValueError:
                 print("enter wrong value")
@@ -80,21 +80,25 @@ class Manager:
         print(f"\nTotal: ${i['total']}\n")
 
     def check_outs1(self):
-        try:
-            i = self.check_out[-1]
-            confirm = input("do you want to pay? (y/n):")
-            if confirm == 'y':
-                i['pay_done'] = True
-                self.saving1()
-                print("payment successfully")
-                return 1
-            elif confirm == 'n':
-                i['pay_done'] = False
-                self.saving1()
-                print("payment fail")
-                return 0
-        except IndexError :
-            print(f"NO DATA FOUND")
+        while True:
+            try:
+                i = self.check_out[-1]
+                confirm = input("do you want to pay? (y/n):")
+                if confirm == 'y':
+                    i['pay_done'] = True
+                    self.saving1()
+                    print("payment successfully")
+                    return 1
+                elif confirm == 'n':
+                    i['pay_done'] = False
+                    self.saving1()
+                    print("payment fail")
+                    break
+                else:
+                    print("enter wrong value")
+
+            except IndexError :
+                print(f"NO DATA FOUND")
 
     def history(self):
 
@@ -134,6 +138,7 @@ class Manager:
         with open (self.file, 'w') as f:
             json.dump(self.movie_name, f , indent=4)
 
+
     def saving1(self):
         with open (self.file1, 'w') as f:
             json.dump(self.check_out, f , indent=4)
@@ -145,7 +150,6 @@ class Manager:
         except (FileNotFoundError , json.decoder.JSONDecodeError) :
             self.movie_name = []
 
-
     def loading1(self):
         try:
             with open (self.file1, 'r') as f:
@@ -153,7 +157,7 @@ class Manager:
         except (FileNotFoundError , json.decoder.JSONDecodeError):
             self.check_out = []
 
-    def load_movie(self):
-        with open (self.file, 'r') as f:
+    def load_movie(self , enter):
+        with open (self.file1, 'r') as f:
             dota = json.load(f)
-        return dota['movie_name']
+        return dota[enter]['hall']
