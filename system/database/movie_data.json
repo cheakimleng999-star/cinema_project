@@ -19,9 +19,8 @@
     },
     {
         "ID": 4,
-        "movie_name": "ka",
-        "time_start": "3:50 PM",
-        "price": 4.0,
-        "hall": "system/database/movie_data.json"
+        "movie_name": "avenger end game",
+        "time_start": "6:00 PM",
+        "price": 2.5
     }
 ]

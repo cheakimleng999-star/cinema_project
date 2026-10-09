@@ -23,4 +23,9 @@ class Client:
         with open(self.json,'w') as f:
             json.dump(self.datas,f,indent=4)
         return self.datas
+    def clear_datas(self):
+        self.datas = []
+        with open(self.json,'w') as f:
+            json.dump([] , f)
+
 

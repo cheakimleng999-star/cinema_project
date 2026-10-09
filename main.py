@@ -44,10 +44,10 @@ def cashiers():
                         )
 
                         if already_book:
-                            print("‼️ This seat has been booked by someone in this hall")
+                            print("‼️ This seat has been book by someone in this hall")
                         else:
                             client.enter_data(seat, choose, user)  # pass hall too
-                            print(f"✅ Your seat booking [Hall {choose} - Seat {seat}] is confirmed")
+                            print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
                             break
                     except ValueError:
                         print("It's not a number!!")
@@ -81,7 +81,8 @@ def managers():
         print("[ 4 ] Remove the movie")
         print("[ 5 ] Manage Users")
         print("[ 6 ] View history")
-        print("[ 7 ] logout")
+        print("[ 7 ] Clear history all data")
+        print("[ 8 ] logout")
         choice = input("select the option:")
 
         if choice == '1':
@@ -135,10 +136,10 @@ def managers():
                         )
 
                         if already_book:
-                            print("‼️ This seat has been booked by someone in this hall")
+                            print("‼️ This seat has been book by someone")
                         else:
                             client.enter_data(seat, choose, user)  # pass hall too
-                            print(f"✅ Your seat booking [Hall {choose} - Seat {seat}] is confirmed")
+                            print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
                             break
                     except ValueError:
                         print("It's not a number!!")
@@ -180,6 +181,17 @@ def managers():
             continues()
 
         elif choice == '7':
+            sure = input("Are you sure you want to clear all data(y or n)?:")
+            if sure.lower() == 'y':
+               manager_cashier.clear_data()
+               client.clear_datas()
+               print("your data have been clear .")
+               continues()
+            else:
+               print("Thank you!")
+               continues()
+
+        elif choice == '8':
             print("Thank you for using Cinema system !")
             break
         else:

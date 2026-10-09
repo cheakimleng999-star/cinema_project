@@ -157,7 +157,7 @@ class Manager:
         except (FileNotFoundError , json.decoder.JSONDecodeError):
             self.check_out = []
 
-    def load_movie(self , enter):
-        with open (self.file1, 'r') as f:
-            dota = json.load(f)
-        return dota[enter]['hall']
+    def clear_data(self):
+        self.check_out = []
+        with open(self.file1 , "w") as g:
+            json.dump([] , g)
