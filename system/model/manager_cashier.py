@@ -78,6 +78,7 @@ class Manager:
         print("-" * 55)
         print(f"{i['name_movie']:<20}{i['how_many']:<30}${i['total']:>15}")
         print(f"\nTotal: ${i['total']}\n")
+        print(f"Total KHR: ៛{i['total'] * 4000}\n")
 
     def check_outs1(self):
         while True:
@@ -116,6 +117,7 @@ class Manager:
             )
         print("-" * 80)
         print(f"all ToTal :{sum(i['total'] for i in self.check_out)}    $")
+        print(f"For KHR : {sum(i['total'] * 4000 for i in self.check_out)}    ៛")
         print("\n")
         o = input("do you want CSV file? (y/n):")
         if o == 'y':

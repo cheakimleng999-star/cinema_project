@@ -95,7 +95,7 @@ def managers():
                 try:
                     hours = int(input("enter hours 1hr-12hr:"))
                     if hours <= 12 :
-                       print(f"{hours}hr : XXmin")
+                       print(f"{hours} hr : XX min")
                     elif hours > 12 or hours == 0 :
                        print("it not a time!!")
                        break
@@ -138,7 +138,7 @@ def managers():
                         if already_book:
                             print("‼️ This seat has been book by someone")
                         else:
-                            client.enter_data(seat, choose, user)  # pass hall too
+                            client.enter_data(seat, choose, user)
                             print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
                             break
                     except ValueError:
