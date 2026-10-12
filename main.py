@@ -144,6 +144,7 @@ def managers():
                     except ValueError:
                         print("It's not a number!!")
             user += 1
+
             for i in range(10):
                 sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 4))
                 sys.stdout.flush()
