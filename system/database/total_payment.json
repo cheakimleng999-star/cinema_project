@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "name_movie": "avenger doomsday",
+        "hall": 2,
+        "how_many": 101,
+        "total": 252.5,
+        "date_total": "2026-10-13 02:17:03",
+        "pay_done": false
+    },
+    {
+        "name_movie": "avenger doomsday",
+        "hall": 2,
+        "how_many": 101,
+        "total": 252.5,
+        "date_total": "2026-10-13 02:18:50",
+        "pay_done": false
+    },
+    {
+        "name_movie": "spider man",
+        "hall": 1,
+        "how_many": 101,
+        "total": 303.0,
+        "date_total": "2026-10-13 02:19:23",
+        "pay_done": true
+    }
+]

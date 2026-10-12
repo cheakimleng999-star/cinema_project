@@ -37,18 +37,21 @@ def cashiers():
                 while True:
                     try:
                         seat = int(input("Enter seat number from 1-100: "))
-                        data = client.saving()
-                        already_book = any(
-                            e['seat'] == seat and e['hall'] == choose
-                            for e in data
-                        )
+                        if seat <= 100 :
+                            data = client.saving()
+                            already_book = any(
+                                e['seat'] == seat and e['hall'] == choose
+                                for e in data
+                            )
 
-                        if already_book:
-                            print("‼️ This seat has been book by someone in this hall")
-                        else:
-                            client.enter_data(seat, choose, user)  # pass hall too
-                            print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
-                            break
+                            if already_book:
+                                print("‼️ This seat has been book by someone in this hall")
+                            else:
+                                client.enter_data(seat, choose, user)  # pass hall too
+                                print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
+                                break
+                        elif seat > 100:
+                            print("our hall dont have 100 up seat sorry")
                     except ValueError:
                         print("It's not a number!!")
             user += 1
@@ -129,18 +132,21 @@ def managers():
                 while True:
                     try:
                         seat = int(input("Enter seat number from 1-100: "))
-                        data = client.saving()
-                        already_book = any(
-                            e['seat'] == seat and e['hall'] == choose
-                            for e in data
-                        )
+                        if seat <= 100:
+                            data = client.saving()
+                            already_book = any(
+                                e['seat'] == seat and e['hall'] == choose
+                                for e in data
+                            )
 
-                        if already_book:
-                            print("‼️ This seat has been book by someone")
-                        else:
-                            client.enter_data(seat, choose, user)
-                            print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
-                            break
+                            if already_book:
+                                print("‼️ This seat has been book by someone in this hall")
+                            else:
+                                client.enter_data(seat, choose, user)  # pass hall too
+                                print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
+                                break
+                        elif seat > 100:
+                            print("our hall dont have 100 up seat sorry")
                     except ValueError:
                         print("It's not a number!!")
             user += 1

@@ -50,7 +50,6 @@ class Manager:
             try:
                 choose = int(input("enter movie [HALL] you want to enjoy :"))
                 for i in self.movie_name:
-
                     if choose == i['ID']:
                        how_many = int(input("how many seats you want:"))
                        print(f"{how_many}X of movie {i['movie_name']} to cart. ")
@@ -70,7 +69,7 @@ class Manager:
                        return how_many , choose
                 print("fail payment dont have in your data")
             except ValueError:
-                print("enter wrong value")
+                print("enter wrong value , please try again")
 
     def check_outs(self) :
         i = self.check_out[-1]
@@ -94,7 +93,7 @@ class Manager:
                     i['pay_done'] = False
                     self.saving1()
                     print("payment fail")
-                    break
+                    return 0
                 else:
                     print("enter wrong value")
 
@@ -116,8 +115,9 @@ class Manager:
 
             )
         print("-" * 80)
-        print(f"all ToTal :{sum(i['total'] for i in self.check_out)}    $")
-        print(f"For KHR : {sum(i['total'] * 4000 for i in self.check_out)}    ៛")
+        f = sum(i['pay_done'] == True and i['total']   for i in self.check_out)
+        print(f"all ToTal :{f}    $")
+        print(f"For KHR : {f * 4000}    ៛")
         print("\n")
         o = input("do you want CSV file? (y/n):")
         if o == 'y':
