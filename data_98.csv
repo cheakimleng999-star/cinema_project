@@ -1,9 +1,0 @@
-name_movie,ticket,total,date,paying
-spider man,2,6.0$,2026-10-13 01:26:25,True
-avenger doomsday,3,7.5$,2026-10-13 01:27:12,True
-avenger doomsday,3,7.5$,2026-10-13 01:29:53,False
-avenger doomsday,2,5.0$,2026-10-13 01:30:24,False
-avenger doomsday,2,5.0$,2026-10-13 01:31:34,False
-spider man,2,6.0$,2026-10-13 01:33:23,False
-spider man,2,6.0$,2026-10-13 01:34:58,False
-avenger doomsday,3,7.5$,2026-10-13 01:54:32,False
