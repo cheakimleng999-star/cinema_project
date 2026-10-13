@@ -13,10 +13,13 @@ class Manager:
         self.loading1()
         self.id = 1
     def add_movie(self, add,time,price):
-        if self.movie_name:
-            self.id = max(i['ID'] for i in self.movie_name) + 1
+        ids = [i["ID"] for i in self.movie_name]
+        for i in range(1, max(ids, default=0) + 1):
+            if i not in ids:
+                self.id = i
+                break
         else:
-            self.id = 1
+            self.id = max(ids, default=0) + 1
         data = {
             'ID'        : self.id,
             'movie_name': add,
