@@ -2,13 +2,14 @@ from system.model.staff import Client
 from system.model.manager_cashier import Manager
 from system.model.login import Login
 from system.model.pdf_ticket import *
+from datetime import datetime
 import sys
 import time
-
 
 login_security = Login()
 manager_cashier = Manager()
 client = Client()
+dates = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def continues():
     input("Try any key to be continue.....")
@@ -20,6 +21,7 @@ def cashiers():
         print("[ 2 ] Add Cart to pay")
         print("[ 3 ] Remove the movie")
         print("[ 4 ] logout")
+        print("[ 5 ] request something to the admin")
         choice = input("select the option:")
 
         if choice == '1':
@@ -56,7 +58,7 @@ def cashiers():
                         print("It's not a number!!")
             user += 1
             for i in range(10):
-                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 4))
+                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
                 sys.stdout.flush()
                 time.sleep(0.5)
             print("\nDone!!")
@@ -72,8 +74,16 @@ def cashiers():
             except ValueError:
                 print("please enter valid ID")
                 continues()
+
         elif choice == '4':
             break
+
+        elif choice == '5':
+            text = input("say something you want to request admin:")
+            with open("request_report.txt", "a",newline="") as f:
+                 f.write(f"from cashier ==>{dates+ "  " + text  +  "\n" + "\n"}")
+            print("Thank you for requesting i want check later !! ")
+            continues()
 
 def managers():
     user = 1
@@ -142,7 +152,7 @@ def managers():
                             if already_book:
                                 print("‼️ This seat has been book by someone in this hall")
                             else:
-                                client.enter_data(seat, choose, user)  # pass hall too
+                                client.enter_data(seat, choose, user)
                                 print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
                                 break
                         elif seat > 100:
@@ -152,7 +162,7 @@ def managers():
             user += 1
 
             for i in range(10):
-                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 4))
+                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
                 sys.stdout.flush()
                 time.sleep(0.5)
             print("\nDone!!")
@@ -161,14 +171,30 @@ def managers():
 
         elif choice == '4':
             manager_cashier.view_data()
-            try:
-                deletes = int(input("enter HALL to remove:"))
-                manager_cashier.removing(delete=deletes)
+            t = int(input("1/to remove movie , 2/to clear all movie:"))
+            if t == 1:
+                try:
+                    deletes = int(input("enter HALL to remove:"))
+                    manager_cashier.removing(delete=deletes)
+                    continues()
+                except ValueError:
+                    print("please enter valid ID")
+                    continues()
+            elif t == 2:
+                conform = input("are you sure you want to clear all data movie (y or n):")
+                if conform == 'y':
+                    manager_cashier.clear_movie()
+                    print("movie has been clear all from the data")
+                    continues()
+                elif conform == 'n':
+                    print("ok !!")
+                    continues()
+                else:
+                    print("please enter Y or N")
+                    continues()
+            else:
+                print("wrong choice!! please try again")
                 continues()
-            except ValueError:
-                print("please enter valid ID")
-                continues()
-
         elif choice == '5':
             print("*" * 40)
             login_security.view_manager()
