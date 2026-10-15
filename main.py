@@ -29,6 +29,7 @@ def cashiers():
             continues()
 
         elif choice == '2':
+            space = []
             manager_cashier.view_data()
             how_many, choose = manager_cashier.payment()
             g = manager_cashier.check_outs1()
@@ -39,7 +40,8 @@ def cashiers():
                 while True:
                     try:
                         seat = int(input("Enter seat number from 1-100: "))
-                        if seat <= 100 :
+
+                        if seat <= 100:
                             data = client.saving()
                             already_book = any(
                                 e['seat'] == seat and e['hall'] == choose
@@ -48,15 +50,21 @@ def cashiers():
 
                             if already_book:
                                 print("‼️ This seat has been book by someone in this hall")
+
                             else:
-                                client.enter_data(seat, choose, user)  # pass hall too
+                                client.enter_data(seat=seat, halls=choose, user=user)
+                                space.append(seat)
                                 print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
                                 break
+
                         elif seat > 100:
                             print("our hall dont have 100 up seat sorry")
                     except ValueError:
                         print("It's not a number!!")
+
             user += 1
+            print(f"Your seats : {space} , in hall  {choose} Thank you! ")
+
             for i in range(10):
                 sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
                 sys.stdout.flush()
@@ -82,7 +90,7 @@ def cashiers():
             text = input("say something you want to request admin:")
             with open("request_report.txt", "a",newline="") as f:
                  f.write(f"from cashier ==>{dates+ "  " + text  +  "\n" + "\n"}")
-            print("Thank you for requesting i want check later !! ")
+            print("Thank you for requesting i will check later !! ")
             continues()
 
 def managers():
@@ -132,6 +140,7 @@ def managers():
                 except ValueError:
                     print("wrong value!!")
         elif choice == '3':
+            space = []
             manager_cashier.view_data()
             how_many, choose = manager_cashier.payment()
             g = manager_cashier.check_outs1()
@@ -142,6 +151,7 @@ def managers():
                 while True:
                     try:
                         seat = int(input("Enter seat number from 1-100: "))
+
                         if seat <= 100:
                             data = client.saving()
                             already_book = any(
@@ -151,15 +161,20 @@ def managers():
 
                             if already_book:
                                 print("‼️ This seat has been book by someone in this hall")
+
                             else:
-                                client.enter_data(seat, choose, user)
+                                client.enter_data(seat=seat, halls=choose, user=user)
+                                space.append(seat)
                                 print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
                                 break
+
                         elif seat > 100:
                             print("our hall dont have 100 up seat sorry")
                     except ValueError:
                         print("It's not a number!!")
+
             user += 1
+            print(f"Your seats : {space} , in hall  {choose} Thank you! ")
 
             for i in range(10):
                 sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
@@ -232,6 +247,7 @@ def managers():
 
 def main():
     while True:
+
         me = login_security.manage_cashiers()
         if me == 'cashier':
            cashiers()
