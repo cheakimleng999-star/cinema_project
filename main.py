@@ -88,7 +88,7 @@ def cashiers():
 
         elif choice == '5':
             text = input("say something you want to request admin:")
-            with open("request_report.txt", "a",newline="") as f:
+            with open("request_from_cashier/request_report.txt", "a",newline="") as f:
                  f.write(f"from cashier ==>{dates+ "  " + text  +  "\n" + "\n"}")
             print("Thank you for requesting i will check later !! ")
             continues()
