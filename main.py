@@ -12,11 +12,14 @@ client = Client()
 dates = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def continues():
-    input("Try any key to be continue.....")
+    input("Try any key to be continue....." + "\n" + "\n")
 
 def cashiers():
     user = 1
     while True:
+        print("===========================================")
+        print("welcome to system cinema control cashier")
+        print("===========================================")
         print("[ 1 ] View movie")
         print("[ 2 ] Add Cart to pay")
         print("[ 3 ] Remove the movie")
@@ -29,49 +32,47 @@ def cashiers():
             continues()
 
         elif choice == '2':
-            space = []
-            manager_cashier.view_data()
-            how_many, choose = manager_cashier.payment()
-            g = manager_cashier.check_outs1()
-            if g == 0:
+            while True:
+                space = []
+                manager_cashier.view_data()
+                how_many, choose = manager_cashier.payment()
+                g = manager_cashier.check_outs1()
+                if g == 0:
+                    continues()
+                    break
+                for i in range(how_many):
+                    while True:
+                        try:
+                            seat = int(input("Enter seat number from 1-100: "))
+                            if seat <= 100:
+                                data = client.saving()
+                                already_book = any(
+                                    e['seat'] == seat and e['hall'] == choose
+                                    for e in data
+                                )
+                                if already_book:
+                                    print("‼️ This seat has been book by someone in this hall")
+
+                                else:
+                                    client.enter_data(seat=seat, halls=choose, user=user)
+                                    space.append(seat)
+                                    print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
+                                    break
+
+                            elif seat > 100:
+                                print("our hall dont have 100 up seat sorry")
+                        except ValueError:
+                            print("It's not a number!!")
+                user += 1
+                print(f"Your seats : {space} , in hall  {choose} Thank you! ")
+                for i in range(10):
+                    sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
+                    sys.stdout.flush()
+                    time.sleep(0.5)
+                print("\nDone!!")
+                mainss()
                 continues()
                 break
-            for i in range(how_many):
-                while True:
-                    try:
-                        seat = int(input("Enter seat number from 1-100: "))
-
-                        if seat <= 100:
-                            data = client.saving()
-                            already_book = any(
-                                e['seat'] == seat and e['hall'] == choose
-                                for e in data
-                            )
-
-                            if already_book:
-                                print("‼️ This seat has been book by someone in this hall")
-
-                            else:
-                                client.enter_data(seat=seat, halls=choose, user=user)
-                                space.append(seat)
-                                print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
-                                break
-
-                        elif seat > 100:
-                            print("our hall dont have 100 up seat sorry")
-                    except ValueError:
-                        print("It's not a number!!")
-
-            user += 1
-            print(f"Your seats : {space} , in hall  {choose} Thank you! ")
-
-            for i in range(10):
-                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
-                sys.stdout.flush()
-                time.sleep(0.5)
-            print("\nDone!!")
-            mainss()
-            continues()
 
         elif choice == '3':
             manager_cashier.view_data()
@@ -88,7 +89,7 @@ def cashiers():
 
         elif choice == '5':
             text = input("say something you want to request admin:")
-            with open("request_report.txt", "a",newline="") as f:
+            with open("request_from_cashier/request_report.txt", "a",newline="") as f:
                  f.write(f"from cashier ==>{dates+ "  " + text  +  "\n" + "\n"}")
             print("Thank you for requesting i will check later !! ")
             continues()
@@ -96,6 +97,9 @@ def cashiers():
 def managers():
     user = 1
     while True:
+        print("===========================================")
+        print("welcome to system cinema control manager")
+        print("===========================================")
         print("[ 1 ] View movie")
         print("[ 2 ] Add New movie")
         print("[ 3 ] Add Cart to pay")
@@ -139,50 +143,47 @@ def managers():
                     break
                 except ValueError:
                     print("wrong value!!")
+
         elif choice == '3':
-            space = []
-            manager_cashier.view_data()
-            how_many, choose = manager_cashier.payment()
-            g = manager_cashier.check_outs1()
-            if g == 0:
+            while True:
+                space = []
+                manager_cashier.view_data()
+                how_many, choose = manager_cashier.payment()
+                g = manager_cashier.check_outs1()
+                if g == 0:
+                    continues()
+                    break
+                for i in range(how_many):
+                    while True:
+                        try:
+                            seat = int(input("Enter seat number from 1-100: "))
+                            if seat <= 100:
+                                data = client.saving()
+                                already_book = any(
+                                    e['seat'] == seat and e['hall'] == choose
+                                    for e in data
+                                )
+                                if already_book:
+                                    print("‼️ This seat has been book by someone in this hall")
+                                else:
+                                    client.enter_data(seat=seat, halls=choose, user=user)
+                                    space.append(seat)
+                                    print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
+                                    break
+                            elif seat > 100:
+                                print("our hall dont have 100 up seat sorry")
+                        except ValueError:
+                            print("It's not a number!!")
+                user += 1
+                print(f"Your seats : {space} , in hall  {choose} Thank you! ")
+                for i in range(10):
+                    sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
+                    sys.stdout.flush()
+                    time.sleep(0.5)
+                print("\nDone!!")
+                mainss()
                 continues()
                 break
-            for i in range(how_many):
-                while True:
-                    try:
-                        seat = int(input("Enter seat number from 1-100: "))
-
-                        if seat <= 100:
-                            data = client.saving()
-                            already_book = any(
-                                e['seat'] == seat and e['hall'] == choose
-                                for e in data
-                            )
-
-                            if already_book:
-                                print("‼️ This seat has been book by someone in this hall")
-
-                            else:
-                                client.enter_data(seat=seat, halls=choose, user=user)
-                                space.append(seat)
-                                print(f"✅ Your seat booking [hall {choose} - seat {seat}] is confirm")
-                                break
-
-                        elif seat > 100:
-                            print("our hall dont have 100 up seat sorry")
-                    except ValueError:
-                        print("It's not a number!!")
-
-            user += 1
-            print(f"Your seats : {space} , in hall  {choose} Thank you! ")
-
-            for i in range(10):
-                sys.stdout.write("\rwaiting 5 second to create PDF" + "." * (i % 6))
-                sys.stdout.flush()
-                time.sleep(0.5)
-            print("\nDone!!")
-            mainss()
-            continues()
 
         elif choice == '4':
             manager_cashier.view_data()
@@ -195,6 +196,7 @@ def managers():
                 except ValueError:
                     print("please enter valid ID")
                     continues()
+
             elif t == 2:
                 conform = input("are you sure you want to clear all data movie (y or n):")
                 if conform == 'y':
@@ -210,6 +212,7 @@ def managers():
             else:
                 print("wrong choice!! please try again")
                 continues()
+
         elif choice == '5':
             print("*" * 40)
             login_security.view_manager()
