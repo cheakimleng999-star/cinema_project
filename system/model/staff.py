@@ -7,7 +7,7 @@ class Client:
         self.json = 'system/database/client.json'
         self.datas = []
 
-    def enter_data(self , seat ,user ,halls):
+    def enter_data(self , seat ,halls,user):
         data = {
             'user':user,
             'id'  : random.randint(1000,9999)   ,
@@ -15,6 +15,7 @@ class Client:
             'time': datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
             'hall': halls
         }
+
         self.datas.append(data)
         self.saving()
         return  data['seat']
@@ -23,6 +24,11 @@ class Client:
         with open(self.json,'w') as f:
             json.dump(self.datas,f,indent=4)
         return self.datas
+
+    def loadingg(self):
+        with open(self.json , 'r') as f:
+            mea = json.load(f)
+        return mea
     def clear_datas(self):
         self.datas = []
         with open(self.json,'w') as f:

@@ -166,3 +166,8 @@ class Manager:
         self.check_out = []
         with open(self.file1 , "w") as g:
             json.dump([] , g)
+
+    def clear_movie(self):
+        self.movie_name = []
+        with open(self.file , "w") as g:
+            json.dump([] , g)
